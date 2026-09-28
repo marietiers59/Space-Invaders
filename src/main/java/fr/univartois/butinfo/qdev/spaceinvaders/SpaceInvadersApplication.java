@@ -14,13 +14,13 @@
  * Tous droits réservés.
  */
 
-package fr.univartois.butinfo.qdev2.spaceinvaders;
+package fr.univartois.butinfo.qdev.spaceinvaders;
 
 import java.io.IOException;
 
-import fr.univartois.butinfo.qdev2.spaceinvaders.controller.SpaceInvadersController;
-import fr.univartois.butinfo.qdev2.spaceinvaders.model.SpaceInvadersGame;
-import fr.univartois.butinfo.qdev2.spaceinvaders.view.SpriteStore;
+import fr.univartois.butinfo.qdev.spaceinvaders.controller.SpaceInvadersController;
+import fr.univartois.butinfo.qdev.spaceinvaders.model.SpaceInvadersGame;
+import fr.univartois.butinfo.qdev.spaceinvaders.view.SpriteStore;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -35,7 +35,7 @@ import javafx.stage.Stage;
  *
  * @version 0.1.0
  */
-public final class SpaceInvaders extends Application {
+public final class SpaceInvadersApplication extends Application {
 
     /**
      * La largeur (en pixels) de la fenêtre affichant le jeu.
@@ -83,7 +83,7 @@ public final class SpaceInvaders extends Application {
      *
      * @see #launch(String...)
      */
-    public static void main(String[] args) {
+    static void main() {
         launch();
     }
 

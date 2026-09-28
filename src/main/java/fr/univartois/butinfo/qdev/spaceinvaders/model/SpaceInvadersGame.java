@@ -14,13 +14,13 @@
  * Tous droits réservés.
  */
 
-package fr.univartois.butinfo.qdev2.spaceinvaders.model;
+package fr.univartois.butinfo.qdev.spaceinvaders.model;
 
 import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
 
-import fr.univartois.butinfo.qdev2.spaceinvaders.view.ISpriteStore;
-import fr.univartois.butinfo.qdev2.spaceinvaders.view.Sprite;
+import fr.univartois.butinfo.qdev.spaceinvaders.view.ISpriteStore;
+import fr.univartois.butinfo.qdev.spaceinvaders.view.Sprite;
 import javafx.animation.AnimationTimer;
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;

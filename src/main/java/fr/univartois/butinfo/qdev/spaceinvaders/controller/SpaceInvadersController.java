@@ -14,13 +14,13 @@
  * Tous droits réservés.
  */
 
-package fr.univartois.butinfo.qdev2.spaceinvaders.controller;
+package fr.univartois.butinfo.qdev.spaceinvaders.controller;
 
-import fr.univartois.butinfo.qdev2.spaceinvaders.model.IMovable;
-import fr.univartois.butinfo.qdev2.spaceinvaders.model.ISpaceInvadersController;
-import fr.univartois.butinfo.qdev2.spaceinvaders.model.SpaceInvadersGame;
-import fr.univartois.butinfo.qdev2.spaceinvaders.view.ISpriteStore;
-import fr.univartois.butinfo.qdev2.spaceinvaders.view.Sprite;
+import fr.univartois.butinfo.qdev.spaceinvaders.model.IMovable;
+import fr.univartois.butinfo.qdev.spaceinvaders.model.ISpaceInvadersController;
+import fr.univartois.butinfo.qdev.spaceinvaders.model.SpaceInvadersGame;
+import fr.univartois.butinfo.qdev.spaceinvaders.view.ISpriteStore;
+import fr.univartois.butinfo.qdev.spaceinvaders.view.Sprite;
 import javafx.beans.property.IntegerProperty;
 import javafx.fxml.FXML;
 import javafx.scene.canvas.Canvas;

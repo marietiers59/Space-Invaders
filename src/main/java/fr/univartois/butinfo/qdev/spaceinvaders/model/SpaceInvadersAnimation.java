@@ -14,7 +14,7 @@
  * Tous droits réservés.
  */
 
-package fr.univartois.butinfo.qdev2.spaceinvaders.model;
+package fr.univartois.butinfo.qdev.spaceinvaders.model;
 
 import java.util.List;
 

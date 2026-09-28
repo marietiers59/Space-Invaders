@@ -8,4 +8,4 @@
  * @version 0.1.0
  */
 
-package fr.univartois.butinfo.qdev2.spaceinvaders.model.movables;
+package fr.univartois.butinfo.qdev.spaceinvaders.model.movables;

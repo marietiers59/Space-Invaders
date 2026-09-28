@@ -14,10 +14,10 @@
  * Tous droits réservés.
  */
 
-package fr.univartois.butinfo.qdev2.spaceinvaders.model;
+package fr.univartois.butinfo.qdev.spaceinvaders.model;
 
-import fr.univartois.butinfo.qdev2.spaceinvaders.view.ISpriteStore;
-import fr.univartois.butinfo.qdev2.spaceinvaders.view.Sprite;
+import fr.univartois.butinfo.qdev.spaceinvaders.view.ISpriteStore;
+import fr.univartois.butinfo.qdev.spaceinvaders.view.Sprite;
 
 /**
  * L'interface {@link IMovableFactory} permet de créer différentes instances de

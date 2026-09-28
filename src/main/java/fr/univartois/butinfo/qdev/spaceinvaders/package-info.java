@@ -7,4 +7,4 @@
  * @version 0.1.0
  */
 
-package fr.univartois.butinfo.qdev2.spaceinvaders;
+package fr.univartois.butinfo.qdev.spaceinvaders;

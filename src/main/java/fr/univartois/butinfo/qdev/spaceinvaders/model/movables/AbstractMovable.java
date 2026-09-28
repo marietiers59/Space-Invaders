@@ -14,11 +14,11 @@
  * Tous droits réservés.
  */
 
-package fr.univartois.butinfo.qdev2.spaceinvaders.model.movables;
+package fr.univartois.butinfo.qdev.spaceinvaders.model.movables;
 
-import fr.univartois.butinfo.qdev2.spaceinvaders.model.IMovable;
-import fr.univartois.butinfo.qdev2.spaceinvaders.model.SpaceInvadersGame;
-import fr.univartois.butinfo.qdev2.spaceinvaders.view.Sprite;
+import fr.univartois.butinfo.qdev.spaceinvaders.model.IMovable;
+import fr.univartois.butinfo.qdev.spaceinvaders.model.SpaceInvadersGame;
+import fr.univartois.butinfo.qdev.spaceinvaders.view.Sprite;
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.DoubleProperty;
 import javafx.beans.property.ObjectProperty;
