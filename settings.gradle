@@ -1,6 +1,11 @@
 /*
- * Les paramètres du projet Gradle.
- * Normalement, seul le nom du projet doit apparaître ici.
+ * La configuration du projet Gradle.
  */
 
-rootProject.name = 'projet-2022-2023'
+plugins {
+    // Le plugin foojay-resolver permet de télécharger automatiquement un JDK.
+    id 'org.gradle.toolchains.foojay-resolver-convention' version '1.0.0'
+}
+
+// Le nom du projet.
+rootProject.name = 'projet-2026-2027'
