@@ -1,16 +1,16 @@
-/**
+/*
  * Ce logiciel est distribué à des fins éducatives.
  *
- * Il est fourni "tel quel", sans garantie d’aucune sorte, explicite
- * ou implicite, notamment sans garantie de qualité marchande, d’adéquation
- * à un usage particulier et d’absence de contrefaçon.
- * En aucun cas, les auteurs ou titulaires du droit d’auteur ne seront
+ * Il est fourni "tel quel", sans garantie d'aucune sorte, explicite
+ * ou implicite, notamment sans garantie de qualité marchande, d'adéquation
+ * à un usage particulier et d'absence de contrefaçon.
+ * En aucun cas, les auteurs ou titulaires du droit d'auteur ne seront
  * responsables de tout dommage, réclamation ou autre responsabilité, que ce
- * soit dans le cadre d’un contrat, d’un délit ou autre, en provenance de,
+ * soit dans le cadre d'un contrat, d'un délit ou autre, en provenance de,
  * consécutif à ou en relation avec le logiciel ou son utilisation, ou avec
- * d’autres éléments du logiciel.
+ * d'autres éléments du logiciel.
  *
- * (c) 2022 Romain Wallon - Université d'Artois.
+ * (c) 2022-2026 Romain Wallon - Université d'Artois.
  * Tous droits réservés.
  */
 
@@ -65,11 +65,11 @@ public interface ISpaceInvadersController {
     void bindLife(IntegerProperty lifeProperty);
 
     /**
-     * Ajoute un objet pouvant se déplacer dans le jeu, afin de pouvoir l'afficher.
+     * Ajoute un objet animé à l'affichage du jeu.
      *
-     * @param movable L'objet à aficher.
+     * @param animated L'objet à afficher.
      */
-    void addMovable(IMovable movable);
+    void addAnimated(IAnimated animated);
 
     /**
      * Affiche un message lorsque la partie est terminée.

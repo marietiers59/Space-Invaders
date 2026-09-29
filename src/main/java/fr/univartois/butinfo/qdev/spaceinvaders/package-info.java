@@ -1,6 +1,6 @@
 /**
- * Le paquetage {@code fr.univartois.butinfo.qdev2.spaceinvaders} fournit une implantation
- * en JavaFX du jeu Space-Invaders.
+ * Le paquetage {@code fr.univartois.butinfo.qdev.spaceinvaders} fournit une
+ * implémentation en JavaFX du jeu Space-Invaders.
  *
  * @author Romain Wallon
  *

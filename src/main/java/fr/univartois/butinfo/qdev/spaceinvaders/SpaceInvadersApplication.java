@@ -1,16 +1,16 @@
-/**
+/*
  * Ce logiciel est distribué à des fins éducatives.
  *
- * Il est fourni "tel quel", sans garantie d’aucune sorte, explicite
- * ou implicite, notamment sans garantie de qualité marchande, d’adéquation
- * à un usage particulier et d’absence de contrefaçon.
- * En aucun cas, les auteurs ou titulaires du droit d’auteur ne seront
+ * Il est fourni "tel quel", sans garantie d'aucune sorte, explicite
+ * ou implicite, notamment sans garantie de qualité marchande, d'adéquation
+ * à un usage particulier et d'absence de contrefaçon.
+ * En aucun cas, les auteurs ou titulaires du droit d'auteur ne seront
  * responsables de tout dommage, réclamation ou autre responsabilité, que ce
- * soit dans le cadre d’un contrat, d’un délit ou autre, en provenance de,
+ * soit dans le cadre d'un contrat, d'un délit ou autre, en provenance de,
  * consécutif à ou en relation avec le logiciel ou son utilisation, ou avec
- * d’autres éléments du logiciel.
+ * d'autres éléments du logiciel.
  *
- * (c) 2022 Romain Wallon - Université d'Artois.
+ * (c) 2022-2026 Romain Wallon - Université d'Artois.
  * Tous droits réservés.
  */
 
@@ -28,8 +28,8 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 /**
- * La classe SpaceInvaders permet de lancer l'implantation en JavaFX du jeu
- * Space-Invaders.
+ * La classe SpaceInvadersApplication permet de lancer l'implémentation
+ * en JavaFX du jeu Space-Invaders.
  *
  * @author Romain Wallon
  *
@@ -60,16 +60,15 @@ public final class SpaceInvadersApplication extends Application {
         SpaceInvadersController controller = fxmlLoader.getController();
         controller.setStage(stage);
 
-        // On crée ensuite le jeu, que l'on lie au contrôleur.
+        // On crée ensuite le jeu, et on le lie au contrôleur.
         // TODO Utiliser ici la bonne factory pour créer les objets du jeu.
-        SpaceInvadersGame game = new SpaceInvadersGame(
-                GAME_WIDTH, GAME_HEIGHT, new SpriteStore(), null);
+        var game = new SpaceInvadersGame(GAME_WIDTH, GAME_HEIGHT, new SpriteStore(), null);
         controller.setGame(game);
         game.setController(controller);
         game.prepare();
 
         // On peut maintenant afficher la scène et la fenêtre.
-        Scene scene = new Scene(viewContent, GAME_WIDTH, GAME_HEIGHT);
+        var scene = new Scene(viewContent, GAME_WIDTH, GAME_HEIGHT);
         stage.setScene(scene);
         stage.setTitle("Space Invaders");
         stage.setResizable(false);
@@ -78,8 +77,6 @@ public final class SpaceInvadersApplication extends Application {
 
     /**
      * Exécute l'application JavaFX du jeu Space-Invaders.
-     *
-     * @param args Les arguments de la ligne de commande (dont on ne tient pas compte).
      *
      * @see #launch(String...)
      */

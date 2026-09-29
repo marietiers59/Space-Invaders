@@ -1,6 +1,6 @@
 /**
- * Le paquetage {@code fr.univartois.butinfo.qdev2.spaceinvaders.controller} fournit
- * le contrôleur faisant le lien entre le modèle et la vue du jeu Space-Invaders.
+ * Le paquetage {@code fr.univartois.butinfo.qdev.spaceinvaders.controller} fournit
+ * le contrôleur JavaFX faisant le lien entre le modèle et la vue du jeu Space-Invaders.
  *
  * @author Romain Wallon
  *

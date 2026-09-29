@@ -1,6 +1,6 @@
 /**
- * Le paquetage {@code fr.univartois.butinfo.qdev2.spaceinvaders.model} fournit
- * la représentation du modèle du jeu Space-Invaders.
+ * Le paquetage {@code fr.univartois.butinfo.qdev.spaceinvaders.model} fournit les classes
+ * représentant le modèle du jeu Space-Invaders.
  *
  * @author Romain Wallon
  *

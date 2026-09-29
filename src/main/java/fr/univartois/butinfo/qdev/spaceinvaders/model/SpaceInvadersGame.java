@@ -1,16 +1,16 @@
-/**
+/*
  * Ce logiciel est distribué à des fins éducatives.
  *
- * Il est fourni "tel quel", sans garantie d’aucune sorte, explicite
- * ou implicite, notamment sans garantie de qualité marchande, d’adéquation
- * à un usage particulier et d’absence de contrefaçon.
- * En aucun cas, les auteurs ou titulaires du droit d’auteur ne seront
+ * Il est fourni "tel quel", sans garantie d'aucune sorte, explicite
+ * ou implicite, notamment sans garantie de qualité marchande, d'adéquation
+ * à un usage particulier et d'absence de contrefaçon.
+ * En aucun cas, les auteurs ou titulaires du droit d'auteur ne seront
  * responsables de tout dommage, réclamation ou autre responsabilité, que ce
- * soit dans le cadre d’un contrat, d’un délit ou autre, en provenance de,
+ * soit dans le cadre d'un contrat, d'un délit ou autre, en provenance de,
  * consécutif à ou en relation avec le logiciel ou son utilisation, ou avec
- * d’autres éléments du logiciel.
+ * d'autres éléments du logiciel.
  *
- * (c) 2022 Romain Wallon - Université d'Artois.
+ * (c) 2022-2026 Romain Wallon - Université d'Artois.
  * Tous droits réservés.
  */
 
@@ -61,29 +61,14 @@ public final class SpaceInvadersGame {
     private final ISpriteStore spriteStore;
 
     /**
-     * L'instance de {@link IMovableFactory} permettant de créer les objets du jeu.
+     * L'instance de {@link IAnimatedFactory} permettant de créer les objets du jeu.
      */
-    private IMovableFactory factory;
-
-    /**
-     * Le contrôleur du jeu.
-     */
-    private ISpaceInvadersController controller;
+    private IAnimatedFactory factory;
 
     /**
      * Le vaisseau du joueur.
      */
-    private IMovable ship;
-
-    /**
-     * Le nombre de vies restantes pour le joueur.
-     */
-    private final IntegerProperty life = new SimpleIntegerProperty();
-
-    /**
-     * Le score du joueur (en nombre d'aliens éliminés).
-     */
-    private final IntegerProperty score = new SimpleIntegerProperty();
+    private IAnimated ship;
 
     /**
      * Le timestamp du dernier tir.
@@ -97,33 +82,62 @@ public final class SpaceInvadersGame {
     private int nbRemainingAliens;
 
     /**
-     * La liste des objets pouvant se déplacer dans le jeu.
+     * Le nombre de vies restantes pour le joueur.
      */
-    private final List<IMovable> movableObjects = new CopyOnWriteArrayList<>();
+    private final IntegerProperty life = new SimpleIntegerProperty();
+
+    /**
+     * Le score du joueur (en nombre d'aliens éliminés).
+     */
+    private final IntegerProperty score = new SimpleIntegerProperty();
+
+    /**
+     * La liste des objets mobiles du jeu.
+     */
+    private final List<IAnimated> movingObjects = new CopyOnWriteArrayList<>();
+
+    /**
+     * La liste des objets animés du jeu.
+     */
+    private final List<IAnimated> animatedObjects = new CopyOnWriteArrayList<>();
 
     /**
      * L'animation du jeu, qui s'assure que les différents objets se déplacent.
      */
-    private final AnimationTimer animation = new SpaceInvadersAnimation(this, movableObjects);
+    private final AnimationTimer animation = new GameAnimation(movingObjects, animatedObjects);
+
+    /**
+     * Le contrôleur du jeu.
+     */
+    private ISpaceInvadersController controller;
 
     /**
      * Crée une nouvelle instance de SpaceInvadersGame.
      *
-     * @param width La largeur sur laquelle les objets du jeu peuvent se déplacer (en
-     *        pixels).
-     * @param height La hauteur sur laquelle les objets du jeu peuvent se déplacer (en
-     *        pixels).
+     * @param width La largeur sur laquelle les objets du jeu peuvent se déplacer
+     *        (en pixels).
+     * @param height La hauteur sur laquelle les objets du jeu peuvent se déplacer
+     *        (en pixels).
      * @param spriteStore L'instance de {@link ISpriteStore} permettant de créer les
      *        {@link Sprite} du jeu.
-     * @param factory L'instance de {@link IMovableFactory} permettant de créer les objets
-     *        du jeu.
+     * @param factory L'instance de {@link IAnimatedFactory} permettant de créer les
+     *        objets du jeu.
      */
     public SpaceInvadersGame(int width, int height, ISpriteStore spriteStore,
-            IMovableFactory factory) {
+            IAnimatedFactory factory) {
         this.width = width;
         this.height = height;
         this.spriteStore = spriteStore;
         this.factory = factory;
+    }
+
+    /**
+     * Associe à cette partie de Space-Invaders le contrôleur gérant l'affichage du jeu.
+     *
+     * @param controller Le contrôleur de l'application.
+     */
+    public void setController(ISpaceInvadersController controller) {
+        this.controller = controller;
     }
 
     /**
@@ -185,15 +199,6 @@ public final class SpaceInvadersGame {
     }
 
     /**
-     * Associe à cette partie de Space-Invaders le contrôleur gérant l'affichage du jeu.
-     *
-     * @param controller Le contrôleur de l'application.
-     */
-    public void setController(ISpaceInvadersController controller) {
-        this.controller = controller;
-    }
-
-    /**
      * Prépare une partie de Space-Invaders sur le contrôleur de l'application.
      */
     public void prepare() {
@@ -211,9 +216,19 @@ public final class SpaceInvadersGame {
      * Cette méthode permet également de redémarrer une nouvelle partie.
      */
     public void start() {
+        createAnimated();
         initStatistics();
-        createMovables();
         animation.start();
+    }
+
+    /**
+     * Crée les différents objets animés présents au début de la partie.
+     */
+    private void createAnimated() {
+        // On commence par enlever tous les objets animés encore présents.
+        clearAnimated();
+
+        // TODO Créer le vaisseau du joueur et les aliens.
     }
 
     /**
@@ -223,23 +238,6 @@ public final class SpaceInvadersGame {
         life.set(3);
         score.set(0);
         nbRemainingAliens = 0;
-    }
-
-    /**
-     * Crée les différents objets présents au début de la partie et pouvant se déplacer.
-     */
-    private void createMovables() {
-        // On commence par enlever tous les éléments mobiles encore présents.
-        clearAllMovables();
-
-        // TODO Créer le vaisseau du joueur et les aliens.
-    }
-
-    /**
-     * Choisit aléatoirement un bonus et le place dans le jeu à une position aléatoire.
-     */
-    public void dropBonus() {
-        // TODO Créer le bonus.
     }
 
     /**
@@ -277,7 +275,7 @@ public final class SpaceInvadersGame {
      *
      * @param alien L'alien qui a été tué.
      */
-    public void alienIsDead(IMovable alien) {
+    public void alienIsDead(IAnimated alien) {
         // TODO Mettre à jour l'état du jeu.
     }
 
@@ -303,33 +301,50 @@ public final class SpaceInvadersGame {
     }
 
     /**
-     * Ajoute un objet pouvant se déplacer dans le jeu.
+     * Ajoute un objet mobile dans le jeu.
      *
      * @param object L'objet à ajouter.
      */
-    private void addMovable(IMovable object) {
-        movableObjects.add(object);
-        controller.addMovable(object);
+
+    public void addMoving(IAnimated object) {
+        movingObjects.add(object);
+        addAnimated(object);
     }
 
     /**
-     * Supprime un objet pouvant se déplacer dans le jeu.
+     * Ajoute un objet animé dans le jeu.
+     *
+     * @param object L'objet à ajouter.
+     */
+
+    public void addAnimated(IAnimated object) {
+        animatedObjects.add(object);
+        controller.addAnimated(object);
+        object.onSpawn();
+    }
+
+    /**
+     * Supprime un objet animé dans le jeu.
      *
      * @param object L'objet à supprimer.
      */
-    public void removeMovable(IMovable object) {
-        movableObjects.remove(object);
-        object.consume();
+    public void removeAnimated(IAnimated object) {
+        animatedObjects.remove(object);
+        movingObjects.remove(object);
+        object.onDespawn();
+        object.onDestruction();
     }
 
     /**
-     * Supprime tous les objets pouvant se déplacer dans le jeu.
+     * Supprime tous les objets animés dans le jeu.
      */
-    private void clearAllMovables() {
-        for (IMovable movable : movableObjects) {
-            movable.consume();
+    private void clearAnimated() {
+        for (var animated : animatedObjects) {
+            animated.onDespawn();
+            animated.onDestruction();
         }
-        movableObjects.clear();
+        animatedObjects.clear();
+        movingObjects.clear();
     }
 
 }
