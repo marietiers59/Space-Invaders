@@ -1,10 +1,11 @@
-# Space-Invaders en JavaFX
+# *Space-Invaders* en JavaFX
 
 ## Description
 
-Ce projet fournit une implantation de base du jeu *Space-Invaders* en *JavaFX*
-Pour pouvoir développer votre propre implantation de ce projet, vous devez
-en créer une **divergence** en cliquant sur le bouton `Fork` en haut à droite
+Ce projet fournit une implémentation de base du jeu *Space-Invaders* en
+*JavaFX*.
+Pour pouvoir développer votre propre implémentation de ce projet, vous devez
+en créer une **bifurcation** en cliquant sur le bouton `Fork` en haut à droite
 de cette page.
 
 Lorsque ce sera fait, vous pourrez inviter les membres de votre groupe en tant
@@ -13,236 +14,276 @@ que *Developer* pour vous permettre de travailler ensemble sur ce projet.
 ## Consignes
 
 Vous pouvez retrouver ci-dessous les liens vers les sujets de TP vous guidant
-dans le développement de votre projet.
+dans le développement de votre projet :
 
-- [Lancement du projet](https://gitlab.univ-artois.fr/enseignements-rwa/modules/but-2/q-dev-2/tp/-/tree/main/TP03)
-- [Des patrons de conception dans le *Space-Invaders* (1)](https://gitlab.univ-artois.fr/enseignements-rwa/modules/but-2/q-dev-2/tp/-/tree/main/TP04)
-- [Des patrons de conception dans le *Space-Invaders* (2)](https://gitlab.univ-artois.fr/enseignements-rwa/modules/but-2/q-dev-2/tp/-/tree/main/TP05)
-- [Des patrons de conception dans le *Space-Invaders* (3)](https://gitlab.univ-artois.fr/enseignements-rwa/modules/but-2/q-dev-2/tp/-/tree/main/TP06)
-- [Finalisation du projet *Space-Invaders*](https://gitlab.univ-artois.fr/enseignements-rwa/modules/but-2/q-dev-2/tp/-/tree/main/TP07)
+- [Lancement du projet *Space-Invaders*](https://gitlab.univ-artois.fr/enseignements-rwa/modules/but-2/r3-04/tp/-/tree/main/tp/TP03)
 
-## Aperçu
-
-Le diagramme de classes ci-dessous vous donne un aperçu des fonctionnalités
-disponibles dans ce projet.
-N'hésitez pas à le mettre à jour dans la version dont vous disposez dans votre
-propre projet, afin de permettre à votre enseignant de TP de vous faire des
-retours sur vos choix de conception.
-Il est en fait au format textuel (comme vous pouvez vous en rendre compte si
-vous consulter le texte brut de ce document) et rendu automatiquement par
-*GitLab*, ce qui devrez vous faciliter la tâche.
+## Diagramme de classes
 
 ```plantuml
-@startuml
-
 hide empty members
 
-package fr.univartois.butinfo.qdev2.spaceinvaders.view {
-    class Sprite
-    interface ISpriteStore
-    class SpriteStore
-}
+' --------------------------------------- '
+' Gestion des images du jeu (les sprites) '
+' --------------------------------------- '
 
-class Sprite {
-    - image : Image
+abstract class Sprite {
+    - imageProperty : ObjectBinding<Image>
 
-    + Sprite(Image)
+    # Sprite(imageProperty : ObjectBinding<Image>)
     + getWidth() : int
     + getHeight() : int
-    + getImage() : Image
-    + draw(GraphicsContext, int, int) : void
+    + imageProperty() : ObjectBinding<Image>
+    + {abstract} destroy() : void
+}
+
+class StaticSprite extends Sprite {
+    - StaticSprite(imageProperty : ObjectBinding<Image>)
+    + {static} newInstance(image : Image) : Sprite
+    + destroy() : void
+}
+
+class AnimatedSprite extends Sprite {
+    - timeline : Timeline
+
+    - AnimatedSprite(imageProperty : ObjectBinding<Image>, timeline : Timeline)
+    + {static} newInstance(images : ObservableList<Image>, frameRate : int) : Sprite
+    + destroy() : void
 }
 
 interface ISpriteStore {
-    + {abstract} getSprite(String) : Sprite
+    + {static} DEFAULT_SPRITE_SIZE : int
+    + {static} DEFAULT_FRAME_RATE : int
+
+    + {abstract} getSprite(identifier : String) : Sprite
+    + getSprite(identifiers : String[]) : Sprite
+    + getSprite(frameRate : int, identifiers : String[]) : Sprite
+    + getSprite(identifiers : List<String>) : Sprite
+    + {abstract} getSprite(frameRate : int, identifiers : List<String>) : Sprite
+    + getSpriteSize() : int
 }
 
 class SpriteStore implements ISpriteStore {
-    - cache: Map<String, Sprite>
+    - spriteCache : Map<String, Sprite>
+
+    + getSprite(identifier : String) : Sprite
+    + getSprite(frameRate : int, identifiers : List<String>) : Sprite
+    - loadImage(name : String) : Image
 }
 
 ISpriteStore --> Sprite : << crée >>
 
-
-
-package fr.univartois.butinfo.qdev2.spaceinvaders.model {
-    interface IMovable
-    interface IMovableFactory
-    interface ISpaceInvadersController
-    class SpaceInvadersAnimation
-    class SpaceInvadersGame
-}
-
-interface IMovable {
-    + {abstract} getWidth() : int
-    + {abstract} getHeight() : int
-    + {abstract} setX(int) : void
-    + {abstract} getX() : int
-    + {abstract} getXProperty() : DoubleProperty
-    + {abstract} setY(int) : void
-    + {abstract} getY() : int
-    + {abstract} getYProperty() : DoubleProperty
-    + {abstract} consume() : void
-    + {abstract} isConsumed() : boolean
-    + {abstract} isConsumedProperty() : BooleanProperty
-    + {abstract} setHorizontalSpeed(double) : void
-    + {abstract} getHorizontalSpeed() : double
-    + {abstract} setVerticalSpeed(double) : void
-    + {abstract} getVerticalSpeed() : double
-    + {abstract} move(long) : boolean
-    + {abstract} setSprite(Sprite) : void
-    + {abstract} getSprite() : Sprite
-    + {abstract} getSpriteProperty() : ObjectProperty<Sprite>
-    + {abstract} isCollidingWith(IMovable) : boolean
-    + {abstract} collidedWith(IMovable) : void
-}
-
-interface IMovableFactory {
-    + {abstract} setSpriteStore(ISpriteStore) : void
-    + {abstract} setGame(SpaceInvadersGame) : void
-    + {abstract} createAlien(int, int) : IMovable
-    + {abstract} createShip(int, int) : IMovable
-    + {abstract} createShot(int, int) : IMovable
-}
-
-interface ISpaceInvadersController {
-    + {abstract} setGame(SpaceInvadersGame) : void
-    + {abstract} setSpriteStore(ISpriteStore) : void
-    + {abstract} prepare() : void
-    + {abstract} bindScore(IntegerProperty) : void
-    + {abstract} bindLife(IntegerProperty) : void
-    + {abstract} addMovable(IMovable) : void
-    + {abstract} gameOver(String) : void
-    + {abstract} reset() : void
-}
-
-class SpaceInvadersAnimation {
-    - previousTimestamp : long
-
-    + SpaceInvadersAnimation(List<IMovable>)
-    + handle(long) : void
-    - moveObjects(long) : void
-    - checkCollisions() : void
-}
+' -------------------- '
+' Gestion de la partie '
+' -------------------- '
 
 class SpaceInvadersGame {
-    - {static} SHIP_SPEED : double
-    - {static} SHOT_TEMPORIZATION : long
+    + {static} SHIP_SPEED : double
+    + {static} SHOT_TEMPORIZATION : long
     - width : int
     - height : int
-    - life : IntegerProperty
-    - score : IntegerProperty
+    - spriteStore : ISpriteStore
+    - factory : IAnimatedFactory
+    - ship : IAnimated
     - lastShot : long
     - nbRemainingAliens : int
+    - life : IntegerProperty
+    - score : IntegerProperty
+    - movingObjects : List<IAnimated>
+    - animatedObjects : List<IAnimated>
+    - animation : AnimationTimer
+    - controller : ISpaceInvadersController
 
-    + SpaceInvadersGame(int, int, ISpriteStore, IMovableFactory)
+    + SpaceInvadersGame(width : int, height : int, spriteStore : ISpriteStore, factory : IAnimatedFactory)
+    + setController(controller : ISpaceInvadersController) : void
     + getWidth() : int
     + getLeftLimit() : int
     + getRightLimit() : int
     + getHeight() : int
     + getTopLimit() : int
     + getBottomLimit() : int
-    + setController(ISpaceInvadersController) : void
     + prepare() : void
     + start() : void
+    - createAnimated() : void
     - initStatistics() : void
-    - createMovables() : void
+    - spawnAnimated(animated : IAnimated): void
     + moveLeft() : void
     + moveRight() : void
     + stopMoving() : void
     + fireShot() : void
-    + alienIsDead(IMovable) : void
+    + alienIsDead() : void
     + reducePlayerLife() : void
     + playerIsDead() : void
     + alienReachedPlanet() : void
-    - addMovable(IMovable) : void
-    + removeMovable(IMovable) : void
-    - clearAllMovables() : void
+    + addMoving(object : IAnimated) : void
+    + addAnimated(object : IAnimated) : void
+    + removeAnimated(object : IAnimated) : void
+    - clearAnimated() : void
 }
 
-IMovableFactory --> IMovable : << crée >>
-SpaceInvadersAnimation o-- "0..*" IMovable
+interface IAnimated {
+    + {abstract} getWidth() : int
+    + {abstract} getHeight() : int
+    + {abstract} setX(xPosition : double) : void
+    + {abstract} getX() : int
+    + {abstract} xProperty() : DoubleProperty
+    + {abstract} setY(yPosition : double) : void
+    + {abstract} getY() : int
+    + {abstract} yProperty() : DoubleProperty
+    + {abstract} setHorizontalSpeed(speed : double) : void
+    + {abstract} getHorizontalSpeed() : double
+    + {abstract} setVerticalSpeed(speed : double) : void
+    + {abstract} getVerticalSpeed() : double
+    + {abstract} setSprite(sprite : Sprite) : void
+    + {abstract} getSprite() : Sprite
+    + {abstract} spriteProperty() : ObjectProperty<Sprite>
+    + {abstract} imageProperty() : ObjectProperty<Image>
+    + {abstract} setDestroyed(destroyed : boolean) : void
+    + {abstract} isDestroyed() : boolean
+    + {abstract} destroyedProperty() : BooleanProperty
+    + {abstract} onCreation() : void
+    + {abstract} onSpawn() : void
+    + {abstract} onStep(timeDelta : long) : boolean
+    + {abstract} isCollidingWith(other : IAnimated) : boolean
+    + {abstract} onCollisionWith(other : IAnimated) : void
+    + {abstract} onDespawn() : void
+    + {abstract} onDestruction() : void
+    + {abstract} self() : IAnimated
+}
+
+interface IAnimatedFactory {
+    + {abstract} setSpriteStore(spriteStore : ISpriteStore) : void
+    + {abstract} setGame(game : SpaceInvadersGame) : void
+    + {abstract} createAlien(x : int, y : int) : IAnimated
+    + {abstract} createShip(x : int, y : int) : IAnimated
+    + {abstract} createShot(x : int, y : int) : IAnimated
+}
+
+interface ISpaceInvadersController {
+    + {abstract} setGame(game : SpaceInvadersGame) : void
+    + {abstract} setSpriteStore(spriteStore : ISpriteStore) : void
+    + {abstract} prepare(map : GameMap) : void
+    + {abstract} bindScore(scoreProperty : IntegerExpression) : void
+    + {abstract} bindLife(lifeProperty : IntegerExpression) : void
+    + {abstract} addAnimated(movable : IAnimated) : void
+    + {abstract} gameOver(endMessage : String) : void
+    + {abstract} reset() : void
+}
+
+class GameAnimation {
+    - movingObjects : List<IAnimated>
+    - animatedObjects : List<IAnimated>
+    - previousTimestamp : long
+
+    + GameAnimation(movingObjects : List<IAnimated>, animatedObjects : List<IAnimated>)
+    + start(): void
+    + handle(now : long) : void
+    - updateObjects(delta : long) : void
+    - checkCollisions() : void
+}
+
 SpaceInvadersGame o-- "1" ISpriteStore
-SpaceInvadersGame o-- "1" IMovableFactory
+SpaceInvadersGame o-- "1" GameMap
+SpaceInvadersGame o-- "*" IAnimated
+SpaceInvadersGame o-- "1" GameAnimation
 SpaceInvadersGame o-- "1" ISpaceInvadersController
-SpaceInvadersGame o-- "1" IMovable : ship
-SpaceInvadersGame o-- "0..*" IMovable : movableObjects
-SpaceInvadersGame *-- "1" SpaceInvadersAnimation
 
+IAnimatedFactory o-- "1" ISpriteStore
+IAnimatedFactory o-- "1" SpaceInvadersGame
 
+IAnimatedFactory --> IAnimated : << crée >>
 
-package fr.univartois.butinfo.qdev2.spaceinvaders.model.movables {
-    abstract class AbstractMovable
-}
+GameAnimation o-- "*" IAnimated
 
-abstract class AbstractMovable implements IMovable {
+' --------------------------------- '
+' Gestion de base des objets animés '
+' --------------------------------- '
+
+abstract class AbstractAnimated implements IAnimated {
+    - {static} MARGIN : int
+    # game : SpaceInvadersGame
     # xPosition : DoubleProperty
     # yPosition : DoubleProperty
-    # consumed : BooleanProperty
     # horizontalSpeed : double
     # verticalSpeed : double
+    # destroyed : BooleanProperty
+    # sprite : ObjectProperty<Sprite>
+    # image : ObjectProperty<Image>
 
-    # AbstractMovable(SpaceInvadersGame, double, double, Sprite)
+    # AbstractAnimated(game : SpaceInvadersGame, xPosition : double, yPosition : double, sprite : Sprite)
     + getWidth() : int
     + getHeight() : int
-    + setX(int) : void
+    + setX(xPosition : double) : void
     + getX() : int
-    + getXProperty() : DoubleProperty
-    + setY(int) : void
+    + xProperty() : DoubleProperty
+    + setY(yPosition : double) : void
     + getY() : int
-    + getYProperty() : DoubleProperty
-    + consume() : void
-    + isConsumed() : boolean
-    + isConsumedProperty() : BooleanProperty
-    + setHorizontalSpeed(double) : void
+    + yProperty() : DoubleProperty
+    + setHorizontalSpeed(speed : double) : void
     + getHorizontalSpeed() : double
-    + setVerticalSpeed(double) : void
+    + setVerticalSpeed(speed : double) : void
     + getVerticalSpeed() : double
-    + move(long) : boolean
-    + setSprite(Sprite) : void
+    + setSprite(sprite : Sprite) : void
     + getSprite() : Sprite
-    + getSpriteProperty() : ObjectProperty<Sprite>
-    + isCollidingWith(IMovable) : boolean
+    + spriteProperty() : ObjectProperty<Sprite>
+    + imageProperty() : ObjectProperty<Image>
+    + setDestroyed(destroyed : boolean) : void
+    + isDestroyed() : boolean
+    + destroyedProperty() : BooleanProperty
+    + onCreation() : void
+    + onSpawn() : void
+    + onStep(delta : long) : boolean
+    + isCollidingWith(other : IAnimated) : boolean
+    + onDespawn() : void
+    + onDestruction() : void
+    + self() : IAnimated
+    + hashCode() : int
+    + equals(obj : Object) : boolean
 }
 
-AbstractMovable o-- "1" Sprite
-AbstractMovable o-- "1" SpaceInvadersGame
+AbstractAnimated o-- "1" SpaceInvadersGame
+AbstractAnimated o-- "1" Sprite
 
-
-
-package fr.univartois.butinfo.qdev2.spaceinvaders.controller {
-    class SpaceInvadersController
-}
+' ----------------- '
+' Contrôleur JavaFX '
+' ----------------- '
 
 class SpaceInvadersController implements ISpaceInvadersController {
+    - game : SpaceInvadersGame
     - stage : Stage
-    - background : Canvas
-    - movingPane : Pane
+    - backgroundPane : GridPane
+    - animatedPane : Pane
     - message : Label
     - score : Label
-    - life : Labem
+    - life : Label
+    - started : boolean
 
-    + setStage(Stage) : void
-    - createBackground() : void
+    + setGame(game : SpaceInvadersGame) : void
+    + setStage(stage : Stage) : void
     - addKeyListeners() : void
+    + prepare(map : GameMap) : void
+    - createBackground(map : GameMap) : void
+    + bindScore(scoreProperty : IntegerExpression) : void
+    + bindLife(lifeProperty : IntegerExpression) : void
+    + addAnimated(animated : IAnimated) : void
+    + gameOver(endMessage : String) : void
+    + reset() : void
 }
 
 SpaceInvadersController o-- "1" SpaceInvadersGame
-SpaceInvadersController o-- "1" ISpriteStore
-
-
-
-package fr.univartois.butinfo.qdev2.spaceinvaders {
-    class SpaceInvaders
-}
-
-class SpaceInvaders {
-    + start(Stage) : void
-    + {static} main(String[]) : void
-}
-
-SpaceInvaders --> SpaceInvadersController : << charge >>
-SpaceInvaders -left-> SpaceInvadersGame : << crée >>
-
-@enduml
 ```
+
+## Tâches réalisées
+
+### Jalon n°1 - TP n°3
+
+| Fonctionnalité                             | Terminée ? | Auteur(s)                                     |
+| ------------------------------------------ | ---------- | --------------------------------------------- |
+| Gestion des collisions spécifiques         |            |                                               |
+| Représentation des pac-gommes              |            |                                               |
+| Représentation de Pac-Man                  |            |                                               |
+| Intégration de Pac-Man dans la partie      |            |                                               |
+| Représentation des fantômes                |            |                                               |
+| Intégration des fantômes dans la partie    |            |                                               |
+| Création de la carte du jeu                |            |                                               |
+| Ajout des pac-gommes sur la carte          |            |                                               |

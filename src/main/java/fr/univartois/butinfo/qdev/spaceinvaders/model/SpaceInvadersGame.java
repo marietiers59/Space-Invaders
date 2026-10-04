@@ -216,8 +216,8 @@ public final class SpaceInvadersGame {
      * Cette méthode permet également de redémarrer une nouvelle partie.
      */
     public void start() {
-        createAnimated();
         initStatistics();
+        createAnimated();
         animation.start();
     }
 

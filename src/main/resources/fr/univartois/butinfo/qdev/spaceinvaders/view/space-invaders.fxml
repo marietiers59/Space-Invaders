@@ -11,53 +11,53 @@
 
 <StackPane xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1"
     minHeight="-Infinity" maxHeight="-Infinity" minWidth="-Infinity" maxWidth="-Infinity"
-	fx:controller="fr.univartois.butinfo.qdev.spaceinvaders.controller.SpaceInvadersController">
-	<children>
+    fx:controller="fr.univartois.butinfo.qdev.spaceinvaders.controller.SpaceInvadersController">
+    <children>
         <GridPane fx:id="backgroundPane" />
         <Pane fx:id="animatedPane" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" />
-		<BorderPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308">
-			<center>
-				<Label fx:id="message" text="PRESS ANY KEY TO START..." textFill="WHITE" BorderPane.alignment="CENTER">
-					<font>
-						<Font name="Monospaced Bold" size="16.0" />
-					</font>
-				</Label>
-			</center>
-			<bottom>
-				<GridPane BorderPane.alignment="CENTER">
-					<columnConstraints>
-						<ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-						<ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-						<ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-						<ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-					</columnConstraints>
-					<rowConstraints>
-						<RowConstraints vgrow="SOMETIMES" minHeight="10.0" prefHeight="45.0" />
-					</rowConstraints>
-					<children>
-						<Label text="SCORE: " textFill="WHITE" GridPane.halignment="RIGHT">
-							<font>
-								<Font name="Monospaced Bold" size="13.0" />
-							</font>
-						</Label>
-						<Label fx:id="score" text="0" textFill="WHITE" GridPane.columnIndex="1">
-							<font>
-								<Font name="Monospaced Bold" size="13.0" />
-							</font>
-						</Label>
-						<Label text="LIFE: " textFill="WHITE" GridPane.columnIndex="2" GridPane.halignment="RIGHT">
-							<font>
-								<Font name="Monospaced Bold" size="13.0" />
-							</font>
-						</Label>
-						<Label fx:id="life" text="3" textFill="WHITE" GridPane.columnIndex="3">
-							<font>
-								<Font name="Monospaced Bold" size="13.0" />
-							</font>
-						</Label>
-					</children>
-				</GridPane>
-			</bottom>
-		</BorderPane>
-	</children>
+        <BorderPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308">
+            <center>
+                <Label fx:id="message" text="PRESS ANY KEY TO START..." textFill="WHITE" BorderPane.alignment="CENTER">
+                    <font>
+                        <Font name="Monospaced Bold" size="16.0" />
+                    </font>
+                </Label>
+            </center>
+            <bottom>
+                <GridPane BorderPane.alignment="CENTER">
+                    <columnConstraints>
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                    </columnConstraints>
+                    <rowConstraints>
+                        <RowConstraints vgrow="SOMETIMES" minHeight="10.0" prefHeight="45.0" />
+                    </rowConstraints>
+                    <children>
+                        <Label text="SCORE: " textFill="WHITE" GridPane.halignment="RIGHT">
+                            <font>
+                                <Font name="Monospaced Bold" size="13.0" />
+                            </font>
+                        </Label>
+                        <Label fx:id="score" text="0" textFill="WHITE" GridPane.columnIndex="1">
+                            <font>
+                                <Font name="Monospaced Bold" size="13.0" />
+                            </font>
+                        </Label>
+                        <Label text="LIFE: " textFill="WHITE" GridPane.columnIndex="2" GridPane.halignment="RIGHT">
+                            <font>
+                                <Font name="Monospaced Bold" size="13.0" />
+                            </font>
+                        </Label>
+                        <Label fx:id="life" text="3" textFill="WHITE" GridPane.columnIndex="3">
+                            <font>
+                                <Font name="Monospaced Bold" size="13.0" />
+                            </font>
+                        </Label>
+                    </children>
+                </GridPane>
+            </bottom>
+        </BorderPane>
+    </children>
 </StackPane>
