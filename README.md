@@ -279,11 +279,11 @@ SpaceInvadersController o-- "1" SpaceInvadersGame
 
 | Fonctionnalité                             | Terminée ? | Auteur(s)                                     |
 | ------------------------------------------ | ---------- | --------------------------------------------- |
+| Représentation d'un tir                    |            |                                               |
+| Représentation du vaisseau du joueur       |            |                                               |
+| Représentation d'un vaisseau alien         |            |                                               |
 | Gestion des collisions spécifiques         |            |                                               |
-| Représentation des pac-gommes              |            |                                               |
-| Représentation de Pac-Man                  |            |                                               |
-| Intégration de Pac-Man dans la partie      |            |                                               |
-| Représentation des fantômes                |            |                                               |
-| Intégration des fantômes dans la partie    |            |                                               |
-| Création de la carte du jeu                |            |                                               |
-| Ajout des pac-gommes sur la carte          |            |                                               |
+| Création des différents éléments du jeu    |            |                                               |
+| Intégration des vaisseaux dans la partie   |            |                                               |
+| Gestion du tir allié                       |            |                                               |
+| Gestion de la fin de partie                |            |                                               |
