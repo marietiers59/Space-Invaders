@@ -1,5 +1,9 @@
 # *Space-Invaders* en JavaFX
 
+# Chef de Projet : Aurora Thellier
+## Groupe : B3
+## Membres du Projet : Ikram Alouli, Thibault Breguet, Marie Tiers
+
 ## Description
 
 Ce projet fournit une implémentation de base du jeu *Space-Invaders* en
