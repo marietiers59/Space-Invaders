@@ -63,7 +63,7 @@ public interface ISpriteStore {
      * @return L'instance de {@link Sprite} correspondant aux identifiants donnés.
      *
      * @throws NoSuchElementException Si aucune instance de {@link Sprite} ne correspond
-     *         aux identifiants donné.
+     *         aux identifiants donnés.
      */
     default Sprite getSprite(String... identifiers) {
         return getSprite(DEFAULT_FRAME_RATE, identifiers);
@@ -78,7 +78,7 @@ public interface ISpriteStore {
      * @return L'instance de {@link Sprite} correspondant aux identifiants donnés.
      *
      * @throws NoSuchElementException Si aucune instance de {@link Sprite} ne correspond
-     *         aux identifiants donné.
+     *         aux identifiants donnés.
      */
     default Sprite getSprite(int frameRate, String... identifiers) {
         return getSprite(frameRate, List.of(identifiers));
@@ -92,7 +92,7 @@ public interface ISpriteStore {
      * @return L'instance de {@link Sprite} correspondant aux identifiants donnés.
      *
      * @throws NoSuchElementException Si aucune instance de {@link Sprite} ne correspond
-     *         aux identifiants donné.
+     *         aux identifiants donnés.
      */
     default Sprite getSprite(List<String> identifiers) {
         return getSprite(DEFAULT_FRAME_RATE, identifiers);
@@ -107,7 +107,7 @@ public interface ISpriteStore {
      * @return L'instance de {@link Sprite} correspondant aux identifiants donnés.
      *
      * @throws NoSuchElementException Si aucune instance de {@link Sprite} ne correspond
-     *         aux identifiants donné.
+     *         aux identifiants donnés.
      */
     Sprite getSprite(int frameRate, List<String> identifiers);
 

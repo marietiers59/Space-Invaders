@@ -26,7 +26,7 @@ import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 
 /**
- * La classe {@link SpaceInvadersGame} permet de gérer une partie du jeu Space-Invaders.
+ * La classe SpaceInvadersGame permet de gérer une partie du jeu Space-Invaders.
  *
  * @author Romain Wallon
  *
@@ -102,7 +102,7 @@ public final class SpaceInvadersGame {
     private final List<IAnimated> animatedObjects = new CopyOnWriteArrayList<>();
 
     /**
-     * L'animation du jeu, qui s'assure que les différents objets se déplacent.
+     * L'animation du jeu, qui permet aux différents objets de se déplacer.
      */
     private final AnimationTimer animation = new GameAnimation(movingObjects, animatedObjects);
 
@@ -305,7 +305,6 @@ public final class SpaceInvadersGame {
      *
      * @param object L'objet à ajouter.
      */
-
     public void addMoving(IAnimated object) {
         movingObjects.add(object);
         addAnimated(object);
@@ -316,7 +315,6 @@ public final class SpaceInvadersGame {
      *
      * @param object L'objet à ajouter.
      */
-
     public void addAnimated(IAnimated object) {
         animatedObjects.add(object);
         controller.addAnimated(object);
