@@ -294,3 +294,10 @@ SpaceInvadersController o-- "1" ISpriteStore
 | Intégration des vaisseaux dans la partie   |            |                                               |
 | Gestion du tir allié                       |            |                                               |
 | Gestion de la fin de partie                |            |                                               |
+
+### Jalon n°2 - TP n°4
+
+| Fonctionnalité                             | Patron de Conception ? | Terminée ? | Auteur(s)                                     |
+| ------------------------------------------ | ---------------------- | ---------- | --------------------------------------------- |
+| Variantes de déplacement pour les aliens   |                        |            |                                               |
+| Variantes de tir pour les aliens           |                        |            |                                               |
