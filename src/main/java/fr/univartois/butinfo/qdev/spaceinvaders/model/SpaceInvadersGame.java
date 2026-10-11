@@ -229,6 +229,32 @@ public final class SpaceInvadersGame {
         clearAnimated();
 
         // TODO Créer le vaisseau du joueur et les aliens.
+        int x = getWidth() / 2;
+        int y = getBottomLimit();
+
+        ship = factory.createShip(x, y);
+
+        // Ajouter le vaisseau au jeu
+        addMoving(ship);
+
+        // 2. Créer plusieurs aliens en haut de l'écran
+        for (int i = 0; i < 5; i++) {
+
+            // Tous les aliens ont la même position horizontale
+            int alienX = getWidth() / 2;
+
+            // Chaque alien est placé plus bas que le précédent
+            int alienY = getTopLimit() + i * 60;
+
+            // Créer un alien
+            IAnimated alien = factory.createAlien(alienX, alienY);
+
+            // Ajouter l'alien au jeu
+            addMoving(alien);
+
+            // 3. Compter les aliens créés
+            nbRemainingAliens++;
+        }
     }
 
     /**
