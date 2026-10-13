@@ -228,7 +228,6 @@ public final class SpaceInvadersGame {
         // On commence par enlever tous les objets animés encore présents.
         clearAnimated();
 
-        // TODO Créer le vaisseau du joueur et les aliens.
         int x = getWidth() / 2;
         int y = getBottomLimit();
 

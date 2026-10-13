@@ -6,9 +6,7 @@ import fr.univartois.butinfo.qdev.spaceinvaders.view.Sprite;
 
 public class PlayerShip extends AbstractAnimated{
 
-	public PlayerShip(SpaceInvadersGame game, double x,
-            double y, Sprite sprite) {
-
+	public PlayerShip(SpaceInvadersGame game, double x, double y, Sprite sprite) {
         super(game, x, y, sprite);
     }
 
