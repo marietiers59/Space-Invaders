@@ -296,7 +296,7 @@ SpaceInvadersController o-- "1" ISpriteStore
 | Gestion des collisions spécifiques         |            |                                               |
 | Création des différents éléments du jeu    |            |                                               |
 | Intégration des vaisseaux dans la partie   |            |                                               |
-| Gestion du tir allié                       |            |                                               |
+| Gestion du tir allié                       | Done       | Aurora                                        |
 | Gestion de la fin de partie                |            |                                               |
 
 ### Jalon n°2 - TP n°4
