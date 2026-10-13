@@ -14,12 +14,17 @@ public class Alien extends AbstractAnimated {
 	
 	@Override
 	public boolean onStep(long timeDelta) {
-		return super.onStep(timeDelta);
+		boolean moved = super.onStep(timeDelta);
+		if(!moved) {
+			setHorizontalSpeed(-1*getHorizontalSpeed());
+		    setVerticalSpeed(1.02*getVerticalSpeed());
+		}
+		return moved;
 	}
 	
 	@Override
 	public void onCollisionWith(IAnimated other) {
-		//TODO
+		// Pour l'instant, une collision n'a aucun effet sur l'alien.
 	}
 	
 }
