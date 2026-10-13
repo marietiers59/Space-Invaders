@@ -290,7 +290,10 @@ public final class SpaceInvadersGame {
      * Réduit la vie du joueur, et interrompt la partie si elle atteint 0.
      */
     public void reducePlayerLife() {
-        // TODO Réduire la vie du joueur.
+        life.setValue(life.intValue()-1);
+        if(life.intValue() == 0){
+            playerIsDead();
+        }
     }
 
     /**
