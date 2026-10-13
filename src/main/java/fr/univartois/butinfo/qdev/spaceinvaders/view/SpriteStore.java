@@ -37,8 +37,8 @@ import javafx.scene.image.Image;
 public final class SpriteStore implements ISpriteStore {
 
     /**
-     * La Map permettant de conserver en cache les différentes instances de {@link Sprite}
-     * déjà chargées.
+     * La {@link Map} permettant de conserver en cache les différentes instances de
+     * {@link Sprite} déjà chargées.
      */
     private final Map<String, Sprite> spriteCache = new HashMap<>();
 
