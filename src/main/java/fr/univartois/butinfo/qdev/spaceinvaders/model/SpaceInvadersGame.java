@@ -280,7 +280,10 @@ public final class SpaceInvadersGame {
      * @param alien L'alien qui a été tué.
      */
     public void alienIsDead(IAnimated alien) {
-        // TODO Mettre à jour l'état du jeu.
+        nbRemainingAliens -= 1;
+        if(nbRemainingAliens == 0){
+            controller.gameOver("Vous avez gagné !");
+        }
     }
 
     /**
