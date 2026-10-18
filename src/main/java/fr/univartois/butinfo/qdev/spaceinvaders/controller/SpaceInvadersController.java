@@ -32,7 +32,7 @@ import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
 /**
- * La classe {@link SpaceInvadersController} fournit le contrôleur permettant de jouer au
+ * La classe SpaceInvadersController fournit le contrôleur permettant de jouer au
  * jeu Space-Invaders dans une interface JavaFX.
  *
  * @author Romain Wallon

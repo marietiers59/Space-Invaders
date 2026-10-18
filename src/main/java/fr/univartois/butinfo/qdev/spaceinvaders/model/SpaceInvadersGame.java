@@ -26,7 +26,7 @@ import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 
 /**
- * La classe {@link SpaceInvadersGame} permet de gérer une partie du jeu Space-Invaders.
+ * La classe SpaceInvadersGame permet de gérer une partie du jeu Space-Invaders.
  *
  * @author Romain Wallon
  *
@@ -102,7 +102,7 @@ public final class SpaceInvadersGame {
     private final List<IAnimated> animatedObjects = new CopyOnWriteArrayList<>();
 
     /**
-     * L'animation du jeu, qui s'assure que les différents objets se déplacent.
+     * L'animation du jeu, qui permet aux différents objets de se déplacer.
      */
     private final AnimationTimer animation = new GameAnimation(movingObjects, animatedObjects);
 
@@ -291,7 +291,11 @@ public final class SpaceInvadersGame {
      * Cette méthode est sans effet si le délai entre deux tirs n'est pas atteint.
      */
     public void fireShot() {
-        // TODO Déclencher un tir, à condition que le délai ait été respecté.
+        long actuel = System.currentTimeMillis();
+        if(actuel - lastShot > SHOT_TEMPORIZATION){
+            addMoving(factory.createShot(ship.getX()+15, ship.getY()+15));
+            lastShot = actuel;
+        }
     }
 
     /**
@@ -301,14 +305,20 @@ public final class SpaceInvadersGame {
      * @param alien L'alien qui a été tué.
      */
     public void alienIsDead(IAnimated alien) {
-        // TODO Mettre à jour l'état du jeu.
+        nbRemainingAliens -= 1;
+        if(nbRemainingAliens == 0){
+            controller.gameOver("Vous avez gagné !");
+        }
     }
 
     /**
      * Réduit la vie du joueur, et interrompt la partie si elle atteint 0.
      */
     public void reducePlayerLife() {
-        // TODO Réduire la vie du joueur.
+        life.setValue(life.intValue()-1);
+        if(life.intValue() == 0){
+            playerIsDead();
+        }
     }
 
     /**
@@ -330,7 +340,6 @@ public final class SpaceInvadersGame {
      *
      * @param object L'objet à ajouter.
      */
-
     public void addMoving(IAnimated object) {
         movingObjects.add(object);
         addAnimated(object);
@@ -341,7 +350,6 @@ public final class SpaceInvadersGame {
      *
      * @param object L'objet à ajouter.
      */
-
     public void addAnimated(IAnimated object) {
         animatedObjects.add(object);
         controller.addAnimated(object);
