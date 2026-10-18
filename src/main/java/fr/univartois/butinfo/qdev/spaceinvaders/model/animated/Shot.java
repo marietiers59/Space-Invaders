@@ -23,6 +23,15 @@ public class Shot extends AbstractAnimated {
 
     @Override
     public void onCollisionWith(IAnimated other) {
-        this.game.removeAnimated(this);
+        other.collidedWithShot(this);
+    }
+
+    @Override
+    public void collidedWithShot(Shot other) {
+        if (isDestroyed() || other.isDestroyed()) {
+            return;
+        }
+        game.removeAnimated(this);
+        game.removeAnimated(other);
     }
 }

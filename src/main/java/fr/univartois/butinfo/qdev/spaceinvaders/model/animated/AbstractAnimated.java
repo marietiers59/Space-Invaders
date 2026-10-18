@@ -467,4 +467,13 @@ public abstract class AbstractAnimated implements IAnimated {
         return false;
     }
 
+    @Override
+    public void collidedWithAlien(Alien alien) {
+        // Ne fait rien
+    }
+
+    @Override
+    public void collidedWithShot(Shot shot) {
+        // Ne fait rien
+    }
 }
