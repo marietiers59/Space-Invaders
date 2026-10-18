@@ -290,14 +290,14 @@ SpaceInvadersController o-- "1" ISpriteStore
 
 | Fonctionnalité                             | Terminée ? | Auteur(s)                                     |
 | ------------------------------------------ | ---------- | --------------------------------------------- |
-| Représentation d'un tir                    |            |                                               |
-| Représentation du vaisseau du joueur       |            |                                               |
-| Représentation d'un vaisseau alien         |            |                                               |
-| Gestion des collisions spécifiques         |            |                                               |
-| Création des différents éléments du jeu    |            |                                               |
-| Intégration des vaisseaux dans la partie   |            |                                               |
+| Représentation d'un tir                    | Done       | Thibault                                      |
+| Représentation du vaisseau du joueur       | Done       | Ikram                                         |
+| Représentation d'un vaisseau alien         | Done       | Marie                                         |
+| Gestion des collisions spécifiques         | WIP        | Thibault, Marie                               |
+| Création des différents éléments du jeu    | ToDo       | Aurora                                        |
+| Intégration des vaisseaux dans la partie   | Done       | Ikram                                         |
 | Gestion du tir allié                       | Done       | Aurora                                        |
-| Gestion de la fin de partie                |            |                                               |
+| Gestion de la fin de partie                | ToDo       | Marie                                         |
 
 ### Jalon n°2 - TP n°4
 
