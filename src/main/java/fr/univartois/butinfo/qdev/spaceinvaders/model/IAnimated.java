@@ -16,6 +16,8 @@
 
 package fr.univartois.butinfo.qdev.spaceinvaders.model;
 
+import fr.univartois.butinfo.qdev.spaceinvaders.model.animated.Alien;
+import fr.univartois.butinfo.qdev.spaceinvaders.model.animated.Shot;
 import fr.univartois.butinfo.qdev.spaceinvaders.view.Sprite;
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.DoubleProperty;
@@ -275,4 +277,7 @@ public interface IAnimated {
      */
     IAnimated self();
 
+    void collidedWithAlien(Alien alien);
+
+    void collidedWithShot(Shot shot);
 }
