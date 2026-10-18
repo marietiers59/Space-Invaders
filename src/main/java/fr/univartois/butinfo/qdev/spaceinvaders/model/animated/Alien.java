@@ -27,7 +27,16 @@ public class Alien extends AbstractAnimated {
 
 	@Override
 	public void onCollisionWith(IAnimated other) {
-		// Pour l'instant, une collision n'a aucun effet sur l'alien.
+		other.collidedWithAlien(this);
 	}
 
+	@Override
+	public void collidedWithShot(Shot shot) {
+		if (isDestroyed() || shot.isDestroyed()) {
+			return;
+		}
+		game.alienIsDead(this);
+		game.removeAnimated(this);
+		game.removeAnimated(shot);
+	}
 }

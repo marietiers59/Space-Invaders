@@ -15,4 +15,21 @@ public class PlayerShip extends AbstractAnimated{
 
     }
 
+    @Override
+    public void collidedWithAlien(Alien alien) {
+        if (isDestroyed()) {
+            return;
+        }
+        game.removeAnimated(this);
+        game.playerIsDead();
+    }
+
+    @Override
+    public void collidedWithShot(Shot shot) {
+        if (isDestroyed() || shot.isDestroyed()) {
+            return;
+        }
+        game.removeAnimated(shot);
+        game.reducePlayerLife();
+    }
 }
