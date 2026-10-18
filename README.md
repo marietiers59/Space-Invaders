@@ -293,11 +293,11 @@ SpaceInvadersController o-- "1" ISpriteStore
 | Représentation d'un tir                    | Done       | Thibault                                      |
 | Représentation du vaisseau du joueur       | Done       | Ikram                                         |
 | Représentation d'un vaisseau alien         | Done       | Marie                                         |
-| Gestion des collisions spécifiques         | WIP        | Thibault, Marie                               |
-| Création des différents éléments du jeu    | ToDo       | Aurora                                        |
+| Gestion des collisions spécifiques         | Done       | Thibault, Marie, Aurora                       |
+| Création des différents éléments du jeu    | Done       | Aurora                                        |
 | Intégration des vaisseaux dans la partie   | Done       | Ikram                                         |
 | Gestion du tir allié                       | Done       | Aurora                                        |
-| Gestion de la fin de partie                | ToDo       | Marie                                         |
+| Gestion de la fin de partie                | Done       | Marie                                         |
 
 ### Jalon n°2 - TP n°4
 
