@@ -7,7 +7,7 @@ import fr.univartois.butinfo.qdev.spaceinvaders.view.Sprite;
 public class Shot extends AbstractAnimated {
     protected double verticalSpeed;
 
-    protected Shot(SpaceInvadersGame game, double xPosition, double yPosition, Sprite sprite) {
+    public Shot(SpaceInvadersGame game, double xPosition, double yPosition, Sprite sprite) {
         super(game, xPosition, yPosition, sprite);
         this.verticalSpeed = -300;
     }
@@ -23,6 +23,15 @@ public class Shot extends AbstractAnimated {
 
     @Override
     public void onCollisionWith(IAnimated other) {
-        this.game.removeAnimated(this);
+        other.collidedWithShot(this);
+    }
+
+    @Override
+    public void collidedWithShot(Shot other) {
+        if (isDestroyed() || other.isDestroyed()) {
+            return;
+        }
+        game.removeAnimated(this);
+        game.removeAnimated(other);
     }
 }

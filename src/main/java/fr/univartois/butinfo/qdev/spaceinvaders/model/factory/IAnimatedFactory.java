@@ -14,13 +14,15 @@
  * Tous droits réservés.
  */
 
-package fr.univartois.butinfo.qdev.spaceinvaders.model;
+package fr.univartois.butinfo.qdev.spaceinvaders.model.factory;
 
+import fr.univartois.butinfo.qdev.spaceinvaders.model.IAnimated;
+import fr.univartois.butinfo.qdev.spaceinvaders.model.SpaceInvadersGame;
 import fr.univartois.butinfo.qdev.spaceinvaders.view.ISpriteStore;
 import fr.univartois.butinfo.qdev.spaceinvaders.view.Sprite;
 
 /**
- * L'interface {@link IAnimatedFactory} permet de créer différentes instances de
+ * L'interface IAnimatedFactory permet de créer différentes instances de
  * {@link IAnimated}.
  *
  * @author Romain Wallon

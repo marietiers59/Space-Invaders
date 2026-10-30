@@ -19,6 +19,7 @@ package fr.univartois.butinfo.qdev.spaceinvaders.model;
 import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
 
+import fr.univartois.butinfo.qdev.spaceinvaders.model.factory.IAnimatedFactory;
 import fr.univartois.butinfo.qdev.spaceinvaders.view.ISpriteStore;
 import fr.univartois.butinfo.qdev.spaceinvaders.view.Sprite;
 import javafx.animation.AnimationTimer;
@@ -26,7 +27,7 @@ import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 
 /**
- * La classe {@link SpaceInvadersGame} permet de gérer une partie du jeu Space-Invaders.
+ * La classe SpaceInvadersGame permet de gérer une partie du jeu Space-Invaders.
  *
  * @author Romain Wallon
  *
@@ -102,7 +103,7 @@ public final class SpaceInvadersGame {
     private final List<IAnimated> animatedObjects = new CopyOnWriteArrayList<>();
 
     /**
-     * L'animation du jeu, qui s'assure que les différents objets se déplacent.
+     * L'animation du jeu, qui permet aux différents objets de se déplacer.
      */
     private final AnimationTimer animation = new GameAnimation(movingObjects, animatedObjects);
 
@@ -228,7 +229,32 @@ public final class SpaceInvadersGame {
         // On commence par enlever tous les objets animés encore présents.
         clearAnimated();
 
-        // TODO Créer le vaisseau du joueur et les aliens.
+        int x = getWidth() / 2;
+        int y = getBottomLimit();
+
+        ship = factory.createShip(x, y);
+
+        // Ajouter le vaisseau au jeu
+        addMoving(ship);
+
+        // 2. Créer plusieurs aliens en haut de l'écran
+        for (int i = 0; i < 5; i++) {
+
+            // Tous les aliens ont la même position horizontale
+            int alienX = getWidth() / 2;
+
+            // Chaque alien est placé plus bas que le précédent
+            int alienY = getTopLimit() + i * 60;
+
+            // Créer un alien
+            IAnimated alien = factory.createAlien(alienX, alienY);
+
+            // Ajouter l'alien au jeu
+            addMoving(alien);
+
+            // 3. Compter les aliens créés
+            nbRemainingAliens++;
+        }
     }
 
     /**
@@ -266,7 +292,11 @@ public final class SpaceInvadersGame {
      * Cette méthode est sans effet si le délai entre deux tirs n'est pas atteint.
      */
     public void fireShot() {
-        // TODO Déclencher un tir, à condition que le délai ait été respecté.
+        long actuel = System.currentTimeMillis();
+        if(actuel - lastShot > SHOT_TEMPORIZATION){
+            addMoving(factory.createShot(ship.getX()+15, ship.getY()+15));
+            lastShot = actuel;
+        }
     }
 
     /**
@@ -276,28 +306,36 @@ public final class SpaceInvadersGame {
      * @param alien L'alien qui a été tué.
      */
     public void alienIsDead(IAnimated alien) {
-        // TODO Mettre à jour l'état du jeu.
+        nbRemainingAliens -= 1;
+        if(nbRemainingAliens == 0){
+            controller.gameOver("Vous avez gagné !");
+        }
     }
 
     /**
      * Réduit la vie du joueur, et interrompt la partie si elle atteint 0.
      */
     public void reducePlayerLife() {
-        // TODO Réduire la vie du joueur.
+        life.setValue(life.intValue()-1);
+        if(life.intValue() == 0){
+            playerIsDead();
+        }
     }
 
     /**
      * Termine la partie lorsque le joueur est tué.
      */
     public void playerIsDead() {
-        // TODO Interrompre la partie.
+        animation.stop();
+        controller.gameOver("Vous avez perdu : votre vaisseau a été détruit !");
     }
 
     /**
      * Termine la partie lorsque les aliens atteignent la planète.
      */
     public void alienReachedPlanet() {
-        // TODO Interrompre la partie.
+        animation.stop();
+        controller.gameOver("Vous avez perdu : les aliens ont envahi la planète !");
     }
 
     /**
@@ -305,7 +343,6 @@ public final class SpaceInvadersGame {
      *
      * @param object L'objet à ajouter.
      */
-
     public void addMoving(IAnimated object) {
         movingObjects.add(object);
         addAnimated(object);
@@ -316,7 +353,6 @@ public final class SpaceInvadersGame {
      *
      * @param object L'objet à ajouter.
      */
-
     public void addAnimated(IAnimated object) {
         animatedObjects.add(object);
         controller.addAnimated(object);

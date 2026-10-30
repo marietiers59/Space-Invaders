@@ -134,6 +134,9 @@ interface IAnimated {
     + {abstract} setY(yPosition : double) : void
     + {abstract} getY() : int
     + {abstract} yProperty() : DoubleProperty
+    + {abstract} setRotate(double rotate) : void
+    + {abstract} getRotate() : double
+    + {abstract} rotateProperty() : DoubleProperty
     + {abstract} setHorizontalSpeed(speed : double) : void
     + {abstract} getHorizontalSpeed() : double
     + {abstract} setVerticalSpeed(speed : double) : void
@@ -187,14 +190,13 @@ class GameAnimation {
 }
 
 SpaceInvadersGame o-- "1" ISpriteStore
-SpaceInvadersGame o-- "1" GameMap
+SpaceInvadersGame *-- "1" IAnimatedFactory
 SpaceInvadersGame o-- "*" IAnimated
-SpaceInvadersGame o-- "1" GameAnimation
-SpaceInvadersGame o-- "1" ISpaceInvadersController
+SpaceInvadersGame *-- "1" GameAnimation
+SpaceInvadersGame *-- "1" ISpaceInvadersController
 
 IAnimatedFactory o-- "1" ISpriteStore
-IAnimatedFactory o-- "1" SpaceInvadersGame
-
+IAnimatedFactory *-- "1" SpaceInvadersGame
 IAnimatedFactory --> IAnimated : << crée >>
 
 GameAnimation o-- "*" IAnimated
@@ -204,10 +206,10 @@ GameAnimation o-- "*" IAnimated
 ' --------------------------------- '
 
 abstract class AbstractAnimated implements IAnimated {
-    - {static} MARGIN : int
     # game : SpaceInvadersGame
     # xPosition : DoubleProperty
     # yPosition : DoubleProperty
+    # rotated : DoubleProperty
     # horizontalSpeed : double
     # verticalSpeed : double
     # destroyed : BooleanProperty
@@ -223,6 +225,9 @@ abstract class AbstractAnimated implements IAnimated {
     + setY(yPosition : double) : void
     + getY() : int
     + yProperty() : DoubleProperty
+    + setRotate(double rotate) : void
+    + getRotate() : double
+    + rotateProperty() : DoubleProperty
     + setHorizontalSpeed(speed : double) : void
     + getHorizontalSpeed() : double
     + setVerticalSpeed(speed : double) : void
@@ -254,6 +259,7 @@ AbstractAnimated o-- "1" Sprite
 
 class SpaceInvadersController implements ISpaceInvadersController {
     - game : SpaceInvadersGame
+    - spriteStore : ISpriteStore
     - stage : Stage
     - backgroundPane : GridPane
     - animatedPane : Pane
@@ -274,7 +280,8 @@ class SpaceInvadersController implements ISpaceInvadersController {
     + reset() : void
 }
 
-SpaceInvadersController o-- "1" SpaceInvadersGame
+SpaceInvadersController *-- "1" SpaceInvadersGame
+SpaceInvadersController o-- "1" ISpriteStore
 ```
 
 ## Tâches réalisées
@@ -283,11 +290,18 @@ SpaceInvadersController o-- "1" SpaceInvadersGame
 
 | Fonctionnalité                             | Terminée ? | Auteur(s)                                     |
 | ------------------------------------------ | ---------- | --------------------------------------------- |
-| Représentation d'un tir                    |            |                                               |
-| Représentation du vaisseau du joueur       |            |                                               |
-| Représentation d'un vaisseau alien         |            |                                               |
-| Gestion des collisions spécifiques         |            |                                               |
-| Création des différents éléments du jeu    |            |                                               |
-| Intégration des vaisseaux dans la partie   |            |                                               |
-| Gestion du tir allié                       |            |                                               |
-| Gestion de la fin de partie                |            |                                               |
+| Représentation d'un tir                    | Done       | Thibault                                      |
+| Représentation du vaisseau du joueur       | Done       | Ikram                                         |
+| Représentation d'un vaisseau alien         | Done       | Marie                                         |
+| Gestion des collisions spécifiques         | Done       | Thibault, Marie, Aurora                       |
+| Création des différents éléments du jeu    | Done       | Aurora                                        |
+| Intégration des vaisseaux dans la partie   | Done       | Ikram                                         |
+| Gestion du tir allié                       | Done       | Aurora                                        |
+| Gestion de la fin de partie                | Done       | Marie                                         |
+
+### Jalon n°2 - TP n°4
+
+| Fonctionnalité                             | Patron de Conception ? | Terminée ? | Auteur(s)                                     |
+| ------------------------------------------ | ---------------------- | ---------- | --------------------------------------------- |
+| Variantes de déplacement pour les aliens   |                        |            |                                               |
+| Variantes de tir pour les aliens           |                        |            |                                               |
