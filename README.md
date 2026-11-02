@@ -1,26 +1,32 @@
-# *Space-Invaders* en JavaFX
+# *Space Invaders* en JavaFX
 
-# Chef de Projet : Aurora Thellier
-## Groupe : B3
-## Membres du Projet : Ikram Alouli, Thibault Breguet, Marie Tiers
+Projet d'équipe de la ressource **R3.04 — qualité de développement** (BUT informatique, 2ᵉ année, IUT de Lens),
+développé sous GitLab avec des tickets, des branches par fonctionnalité et des relectures croisées
+avant chaque fusion.
 
-## Description
+Le jeu part d'une **base fournie par l'équipe pédagogique** (Romain Wallon, IUT de Lens) : fenêtre JavaFX,
+boucle d'animation et gestion des images. Notre groupe le complète **jalon par jalon** : tirs, vaisseaux du joueur
+et des aliens, collisions, fin de partie, puis des variantes de comportement construites avec des
+**patrons de conception**.
 
-Ce projet fournit une implémentation de base du jeu *Space-Invaders* en
-*JavaFX*.
-Pour pouvoir développer votre propre implémentation de ce projet, vous devez
-en créer une **bifurcation** en cliquant sur le bouton `Fork` en haut à droite
-de cette page.
+## équipe — groupe B3
 
-Lorsque ce sera fait, vous pourrez inviter les membres de votre groupe en tant
-que *Developer* pour vous permettre de travailler ensemble sur ce projet.
+- **Aurora Thellier**, cheffe de projet
+- **Ikram Alouli**
+- **Thibault Breguet**
+- **Marie Tiers**
 
-## Consignes
+La répartition du travail figure dans la section [Tâches réalisées](#tâches-réalisées), en bas de cette page.
 
-Vous pouvez retrouver ci-dessous les liens vers les sujets de TP vous guidant
-dans le développement de votre projet :
+## lancer le jeu
 
-- [Lancement du projet *Space-Invaders*](https://gitlab.univ-artois.fr/enseignements-rwa/modules/but-2/r3-04/tp/-/tree/main/tp/TP03)
+Il faut un **JDK 25**. Gradle et JavaFX sont téléchargés automatiquement au premier lancement.
+
+```bash
+git clone https://github.com/marietiers59/space-invaders.git
+cd space-invaders
+./gradlew run          # sous Windows : gradlew.bat run
+```
 
 ## Diagramme de classes
 
