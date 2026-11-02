@@ -303,5 +303,7 @@ SpaceInvadersController o-- "1" ISpriteStore
 
 | Fonctionnalité                             | Patron de Conception ? | Terminée ? | Auteur(s)                                     |
 | ------------------------------------------ | ---------------------- | ---------- | --------------------------------------------- |
-| Variantes de déplacement pour les aliens   |                        |            |                                               |
-| Variantes de tir pour les aliens           |                        |            |                                               |
+| Variantes de déplacement pour les aliens   | Stratégie              |            |                                               |
+| Déplacement « Niveau 1 »                   | Stratégie              | Done       | Marie                                         |
+| Variantes de tir pour les aliens           | Stratégie              |            |                                               |
+| Tir aléatoire des aliens                   | Stratégie              | Done       | Marie                                         |
